@@ -22,14 +22,13 @@ difference() {
     translate([0,r-d,-h*2])
     cylinder(h*5,2.6,2.6);
     
-    translate([0,-r-10,-2])
-cube(r);
-    
-        translate([-r-10,0,-2])
-cube(r);
-            translate([-r,-r,-2])
-cube(r+2);
+    translate([-(r-d),0,-h*2])
+    cylinder(h*5,2.6,2.6);
+
+    translate([0,-(r-d),-h*2])
+    cylinder(h*5,2.6,2.6);
    
 }
 }
+
 
