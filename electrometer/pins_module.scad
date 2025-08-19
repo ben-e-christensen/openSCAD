@@ -4,7 +4,7 @@ module pins() {
 $fn=100;
 pin_count = 7;
 pin_pitch = 2.54;       // mm, standard header pitch
-pin_diameter = 1;    // mm, approx pin diameter
+pin_diameter = 1.2;    // mm, approx pin diameter
 pin_length = 10;        // mm, length of each pin
 actual_diameter = 0.7;
 row_distance = 8 - (actual_diameter/2);
