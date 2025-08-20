@@ -1,6 +1,7 @@
 $fn=300;
 
 r = 4 * 25.4;
+hole = 26/4;
 d=7.5;
 rim_width = 22;
 h=3;
@@ -16,6 +17,9 @@ module altoids_box() {
     cylinder(h*2, 3.1,3.1);
     translate([2/3*a_w,2/3*a_l,0])
     cylinder(h*2, 3.1,3.1);
+    
+    translate([1/3*a_w,1/3*a_l,0])
+    cylinder(h*2,hole,hole);
 }
 
 difference() {
@@ -39,5 +43,9 @@ difference() {
 
     translate([0,-(r-d),-h*2])
     cylinder(h*5,2.6,2.6);
-   
-}
+    
+    translate([a_w/1.5,-1/3*a_l,-1])
+    altoids_box();
+    
+    translate([-a_w*1.33,-1/3*a_l,-1])
+    altoids_box();}
