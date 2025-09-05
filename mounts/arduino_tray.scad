@@ -17,7 +17,8 @@ y3=y2+27.9;
 x4=x1+1.1;
 y4=y3+15.2;
 difference(){
-    translate([10,-2.5])
+    translate([10
+    ,-2.5])
 cube([w,l,h]);
     
     translate([x1,y1, -h])
