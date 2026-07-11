@@ -50,6 +50,7 @@ difference() {
                 translate([-(nema_width + motor_gap/2 + side_padding/2), 0]) circle(r=m5_clearance);
                 translate([(nema_width + motor_gap/2 + side_padding/2), 0]) circle(r=m5_clearance);
                 
+    // these are the holes that the ball joints line up with !!
                 translate([-(nema_width + motor_gap/2 + side_padding/2)/2, 0]) circle(r=m5_clearance);
                 translate([(nema_width + motor_gap/2 + side_padding/2)/2, 0]) circle(r=m5_clearance);
                 
