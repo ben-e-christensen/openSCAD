@@ -66,11 +66,11 @@ for (i = [0:2]) {
 
 
 module square20(){
-    square(20.2,center=true);
+    square(22.2,center=true);
 }
 
 module square20x40() {
-    square([20.2,40.2],center=true);
+    square([22.2,42.2],center=true);
 }
 
 module main_square(){
@@ -86,17 +86,17 @@ module main_square(){
     }
     
     for(i=[0:1]){
-        translate([(-1)^i*(w1/2-10),l1/2-20])
+        translate([(-1)^i*(w1/2-11),l1/2-21])
         square20x40();
     }
     
     for(i=[0:1]){
-        translate([(-1)^i*(w1/2-10),-l1/2+10])
+        translate([(-1)^i*(w1/2-11),-l1/2+11])
         square20();        
     }
     
     for(i=[0:1]){
-        translate([(-1)^i*(w1/2-10-in-20),l1/2-10])
+        translate([(-1)^i*(w1/2-10-in-21),l1/2-11])
         square20();
     }
     
@@ -111,7 +111,7 @@ module side_square(){
     difference(){
     square([w2,l1],center=true);
         
-    translate([-w2/2+10,-l1/2+10])
+    translate([-w2/2+11,-l1/2+11])
     square20();
     for(i=[0:1]){
             translate([0,l1/3 - (i * 2*l1/3)])
@@ -124,7 +124,7 @@ module back_square(){
         square([w3,l3],center=true);
         
         for(i=[0:1]){
-        translate([(-1)^i*(w1/2-10-in-20),-l3/2+10])
+        translate([(-1)^i*(w1/2-11-in-20),-l3/2+11])
         square20();
         }
         
@@ -165,10 +165,10 @@ difference(){
     union(){
 main_square();
 
-translate([w1/2+w2/2,0])
+translate([w1/2+w2/2-.1,0])
 side_square();
 
-translate([-(w1/2+w2/2),0])
+translate([-(w1/2+w2/2)+.1,0])
 rotate([0,180,0])
 side_square();
 

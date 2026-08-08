@@ -296,4 +296,82 @@ if (export_2d) {
 
 }
 
+module top_plate(){
+    $fn = 64;
+in = 25.4;
+
+// --- Parameters ---
+ball_radius = 100;         // ball joint distance from center (KINEMATICS-critical)
+bolt_radius = 115;         // M5 bolt holes - outboard, near the edge
+plate_thickness = 6.35;    // 1/4" acrylic
+m5_clearance = 2.6;        // 5.2mm holes for M5 hardware
+bolt_pair_spacing = 25;    // tangential spacing between the 2 bolts at each station
+edge_margin = 20;          // plate material past the bolt holes
+
+// True-symmetric ball-joint azimuths (deg): three identical pairs, 120deg
+// apart, each pair spanning 30deg. Legs 0-5 in order.
+ball_az = [15.00, 345.00, 255.00, 225.00, 135.00, 105.00];
+
+// Bolt-hole azimuths sit at the SAME angles as their ball joints (each bolt
+// station is radially outboard of its ball joint).
+module bolt_pair_at(a) {
+    rotate([0,0,a])
+        translate([bolt_radius, 0]) {
+            translate([0,  bolt_pair_spacing/2]) circle(r=m5_clearance);
+            translate([0, -bolt_pair_spacing/2]) circle(r=m5_clearance);
+            
+            
+        }
+}
+
+// Plate outline reaches just past the bolt holes at each station.
+module plate_outline() {
+    hull() {
+        for (a = ball_az)
+            rotate([0, 0, a])
+                translate([bolt_radius + edge_margin, 0]) circle(r=8);
+    }
+}
+
+module top_plate_2d() {
+    difference() {
+        plate_outline();
+        for(i=[0:2]){
+            rotate([0,0,120 * i])
+            for(j=[0:1]){
+                translate([bolt_radius, 31.5 - (63 * j)]) {
+            translate([0,  bolt_pair_spacing/2]) circle(r=m5_clearance);
+            translate([0, -bolt_pair_spacing/2]) circle(r=m5_clearance);            
+        }
+                }
+                
+        
+    }
+}}
+
+module top_plate_3d() {
+    color("Gold", 0.7) linear_extrude(plate_thickness) top_plate_2d();
+    // red markers = ball-joint centers (radius 100, inboard of the bolts)
+    for (a = ball_az)
+        rotate([0, 0, a])
+            translate([ball_radius, 0, plate_thickness/2])
+                color("Red") sphere(d = 10);
+    // faint 8" disk footprint, for clearance reference
+    color("Blue", 0.12) translate([0,0,plate_thickness])
+        linear_extrude(0.5) circle(r = 8*in/2);
+}
+
+// Toggle: true for a clean 2D DXF export (laser cutting), false for 3D preview.
+export_2d = true;
+
+if (export_2d) top_plate_2d();
+else top_plate_3d();
+    
+
+}
+
+top_plate();
+
+base_plate_mock_up();
+
 
